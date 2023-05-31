@@ -30,7 +30,7 @@ class Book(models.Model):
     isbn = models.CharField(max_length=17)
     content = models.TextField(null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-    # cover_page = models.ImageField
+    cover_page = models.ImageField(upload_to="book_covers/", null=True, blank=True)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     publication = models.ForeignKey(Publication, on_delete=models.CASCADE)
 

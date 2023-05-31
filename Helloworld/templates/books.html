@@ -3,6 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+            crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <style>
         tr, td, th {
             border: 1px solid black;
@@ -11,11 +17,45 @@
         table {
             border-collapse: collapse;
         }
+
+        img {
+            width: 50px;
+        }
+
+        #cards div {
+            display: inline-block;
+            vertical-align: top;
+        }
     </style>
 </head>
 <body>
-<h1>Hello World!</h1>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Pricing</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Disabled</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
+<h1>Hello World!</h1>
 
 <table>
     <tr>
@@ -33,21 +73,68 @@
 </table>
 
 
-<ul>
+<div id="cards">
     {% for book in books %}
-    <li>{{ book.title }}</li>
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="{{MEDIA_URL}}{{book.cover_page.url}}" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">{{ book.title }}</h5>
+            <p class="card-text">{{ book.content }}</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div>
     {% endfor %}
-</ul>
+</div>
 
-<div>
-    <form method="post">
-        {% csrf_token %}
-        {{form.as_p}}
-        <button type="submit">Send</button>
+<!--<div>-->
+<!--    <form method="post">-->
+<!--        {% csrf_token %}-->
+<!--        {{form.as_p}}-->
+<!--        <button type="submit">Send</button>-->
+<!--    </form>-->
+<!--</div>-->
+
+<div class="container">
+    <form>
+        <div class="form-group">
+            {% csrf_token %}
+            <label>Title</label>
+            {{form.title}}
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+            <label>ISBN</label>
+            {{form.isbn}}
+        </div>
+        <div class="form-group">
+            <label>Content</label>
+            {{form.content}}
+        </div>
+        <div class="form-group">
+            <label>Cover Page</label>
+            {{form.cover_page}}
+        </div>
+        <div class="form-group">
+            <label>Publication</label>
+            {{form.publication}}
+        </div>
+        <div class="form-group">
+            <label>Author:</label>
+            {{form.author}}
+        </div>
+
+        <button type="submit" class="mt-5 btn btn-primary">Submit</button>
     </form>
 </div>
 
 {{Date}}
+
+<!--<script>-->
+<!--    $(document).ready(function () {-->
+<!--        $("input").addClass("form-control")-->
+<!--    })-->
+<!--</script>-->
+
 
 </body>
 </html>

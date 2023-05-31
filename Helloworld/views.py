@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Book
 from datetime import datetime
 from .forms import BookForm
@@ -14,6 +14,7 @@ def books(request):
             book.user = request.user
             # book.title = "TITLEFROMVIEW"
             book.save()
+            return redirect("book")
     # user from the model == user from the client
     queryset = Book.objects.filter(user=request.user).all()
     context = {"books": queryset,
