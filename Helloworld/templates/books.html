@@ -39,11 +39,15 @@
     {% endfor %}
 </ul>
 
-{{Date}}
-
 <div>
-    {{form.as_p}}
+    <form method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">Send</button>
+    </form>
 </div>
+
+{{Date}}
 
 </body>
 </html>
